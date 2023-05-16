@@ -8,3 +8,28 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
+
+--This Table stores the users Cars when added along with a reference to the user
+CREATE TABLE "cars" (
+    "id" SERIAL PRIMARY KEY,
+    "vehicle_make" VARCHAR,
+    "vehicle_year" INT,
+    "vehicle_model" VARCHAR (50),
+    "user_id" INT REFERENCES "user"(id)
+);
+
+--This Table is for each seperate Vehicle history
+CREATE TABLE "history" (
+    "id" SERIAL PRIMARY KEY,
+    "history_description" VARCHAR (1000),
+    "car_id" INTEGER REFERENCES "cars"(id),
+    "notes" VARCHAR (1000),
+    "date" DATE
+);
+
+--This is the Wishlist of each Vehicle
+CREATE TABLE "wishlist" (
+    "id" SERIAL PRIMARY KEY,
+    "description" VARCHAR (1000),
+    "car_id" INTEGER REFERENCES "cars"(id)
+);
