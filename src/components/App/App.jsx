@@ -19,8 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import AddVehicle from '../AddVehicle/AddVehicle';
-import WishList from '../WishList/WishList';
+// import AddVehicle from '../AddVehicle/AddVehicle';
+// import WishList from '../WishList/WishList';
 import './App.css';
 import HomePage from '../HomePage/HomePage';
 
@@ -40,7 +40,7 @@ function App() {
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
-          <HomePage />
+          {/* <HomePage /> */}
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
             // shows AboutPage at all times (logged in or not)
@@ -120,13 +120,13 @@ function App() {
         <Footer />
       </div>
 
-      <Route exact path = "add-vehicle">
+      {/* <Route exact path = "add-vehicle">
             <AddVehicle />
       </Route>
 
       <Route exact path ="/wishlist">
             <WishList />
-      </Route>
+      </Route> */}
 
     </Router>
   );
