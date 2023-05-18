@@ -22,7 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // import AddVehicle from '../AddVehicle/AddVehicle';
 // import WishList from '../WishList/WishList';
 import './App.css';
-import HomePage from '../HomePage/HomePage';
+
 
 function App() {
   const dispatch = useDispatch();
