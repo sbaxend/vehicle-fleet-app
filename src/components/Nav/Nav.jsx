@@ -3,44 +3,50 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 
+import TemporaryDrawer from '../MenuDrawer/MenuDrawer';
 function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
-    <div className="nav">
+    <AppBar>
+      <Toolbar>
+        <TemporaryDrawer/>
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+        <Typography variant='h2' className="nav-title">My Garage</Typography>
       </Link>
       <div>
+      {/* <Button onChange={TemporaryDrawer}><MenuIcon/></Button> */}
         {/* If no user is logged in, show these links */}
         {!user.id && (
           // If there's no user, show login/registration links
-          <Link className="navLink" to="/login">
+          <Button component ={Link} color="inherit"  className="navLink" to="/login">
             Login / Register
-          </Link>
+          </Button>
         )}
 
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className="navLink" to="/user">
+            <Button component={Link} to="/user" color="inherit">
               Home
-            </Link>
+            </Button>
 
-            <Link className="navLink" to="/info">
+            <Button component={Link} to="/info" color="inherit">
               Info Page
-            </Link>
+            </Button>
 
             <LogOutButton className="navLink" />
           </>
         )}
 
-        <Link className="navLink" to="/about">
-          About
-        </Link>
+            <Button component={Link} to="/about" color="inherit">
+              About
+            </Button>
       </div>
-    </div>
+      </Toolbar>
+    </AppBar>
   );
 }
 
