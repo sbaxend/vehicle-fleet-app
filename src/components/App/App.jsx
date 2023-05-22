@@ -22,6 +22,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import AddVehicle from "../AddVehicle/AddVehicle";
 // import WishList from '../WishList/WishList';
 import "./App.css";
+import VehicleDetails from "../VehicleDetails/VehicleDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -105,7 +106,9 @@ function App() {
           <Route exact path="/add-vehicle">
             {user.id ? <AddVehicle /> : <LandingPage />}
           </Route>
-
+          <Route exact path ="/details">
+            <VehicleDetails />
+          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
