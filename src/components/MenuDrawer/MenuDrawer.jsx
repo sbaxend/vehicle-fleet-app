@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
+import LogOutButton from '../LogOutButton/LogOutButton';
 import {useDispatch, useSelector} from 'react-redux';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,6 +16,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { AppBar, Toolbar, Typography} from '@mui/material';
+import { Link } from 'react-router-dom';
+
 function TemporaryDrawer() {
     const [state, setState] = useState({ left: false });
     const user = useSelector((store) => store.user);
@@ -37,32 +40,56 @@ function TemporaryDrawer() {
         onClick={toggleDrawer(false)}
         onKeyDown={toggleDrawer(false)}
       >
-        <h2>{user.username}</h2>
-        <List>
-          {['Home', 'Add Vehicle'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
+         <Typography color="black" variant='h2' >My Garage</Typography>
+       
+      <List>
+        {user.id ? (
+          <>
+            <Divider />
+            <ListItem key="home" disablePadding>
+              <ListItemButton component={Link} to="/user">
                 <ListItemIcon>
-                  {index % 2 === 0 ? <HomeIcon /> : <AddCircleIcon />}
+                  <HomeIcon />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary="Home" />
               </ListItemButton>
             </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {[ 'About', 'Log Out'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <Divider />
+            <ListItem key="add-vehicle" disablePadding>
+              <ListItemButton component={Link} to="/add-vehicle">
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InfoIcon /> : <LogoutIcon />}
+                  <AddCircleIcon />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary="Add Vehicle" />
               </ListItemButton>
             </ListItem>
-          ))}
-        </List>
+            <Divider />
+            <ListItem key="info-page" disablePadding>
+              <ListItemButton component={Link} to="/info">
+                <ListItemIcon>
+                  <InfoIcon />
+                </ListItemIcon>
+                <ListItemText primary="Info Page" />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem key="logout" disablePadding>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <LogOutButton />
+            </ListItem>
+           <Divider />
+          </>
+        ) : (
+          <ListItem key="login-register" disablePadding>
+            <ListItemButton component={Link} to="/login">
+              <ListItemText primary="Login / Register" />
+            </ListItemButton>
+          </ListItem>
+        
+        )}
+      </List>
       </Box>
   );
 

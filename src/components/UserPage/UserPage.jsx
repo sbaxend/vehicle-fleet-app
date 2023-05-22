@@ -1,9 +1,12 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
+
 import {useDispatch, useSelector} from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import TemporaryDrawer from '../MenuDrawer/MenuDrawer';
+import Container from '@mui/material/Container';
+import { List, ListItem} from '@mui/material';
+import Card from '@mui/material/Card';
+
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
@@ -23,25 +26,37 @@ function UserPage() {
 
   }
 
+  const navToDetails =(event) => {
+    event.preventDefault();
+    history.push('/details')
+  }
+
 
   return (
     
-    <div className="container">
-    <ul>
+    <Container className="container" style={{ marginTop: '4rem' }}>
+    {/* <ul>
     {vehicles.map(vehicle => (
       <li key={vehicle.id}>
        {vehicle.vehicle_year} {vehicle.vehicle_make} {vehicle.vehicle_model}
       </li>
     ))}
-  </ul>
+  </ul> */}
+  <List>
+        {vehicles.map((vehicle) => (
+          <Card onClick={navToDetails}>
+          <ListItem key={vehicle.id}>
+            {vehicle.vehicle_year} {vehicle.vehicle_make} {vehicle.vehicle_model}
+          </ListItem>
+          </Card>
+        ))}
+      </List>
  
       <button onClick={navToAdd}>Add</button>
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      
+    
    
   
-  </div>
+  </Container>
   );
 }
 
