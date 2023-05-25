@@ -9,6 +9,13 @@ function AddVehicle () {
 
     const dispatch = useDispatch();
     
+    const clearForm = () => {
+        setMake('')
+        setModel('')
+        setYear('')
+        setBody('')
+    }
+
     const AddVehicle = () => {
 
         dispatch({
@@ -17,7 +24,7 @@ function AddVehicle () {
                        vehicle_year: year,
                        vehicle_model: model,
                        body_style: body},
-            
+            clearForm,
           });
           
     };
