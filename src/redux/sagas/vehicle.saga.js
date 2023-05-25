@@ -11,8 +11,27 @@ function* fetchVehicles () {
     }
   };
 
+function* postVehicle (action) {
+  console.log('in postVehicle', action.payload)
+  try {
+    yield axios.post('/api/vehicle', action.payload);
+    console.log('FETCH_VECHILES');
+    yield put ({type: 'FETCH_VEHICLES' });
+    console.log('Done with FETCH_VECHILES');
+    
+    action.setMake('');
+    action.setModel('');
+    action.setYear('');
+    action.setBody('');
+  } catch (error) {
+    console.log(`error in postVehicle`);
+    alert('Something went wrong');
+  }
+}
+
 function* garageSaga(){
-    yield takeEvery('FETCH_VEHICLES', fetchVehicles)
+    yield takeEvery('FETCH_VEHICLES', fetchVehicles);
+    yield takeEvery('ADD_VEHICLE', postVehicle)
 };
 
 export default garageSaga;

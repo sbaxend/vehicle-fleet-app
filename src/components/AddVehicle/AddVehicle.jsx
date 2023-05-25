@@ -10,17 +10,19 @@ function AddVehicle () {
     const dispatch = useDispatch();
     
     const AddVehicle = () => {
+
         dispatch({
             type: 'ADD_VEHICLE',
             payload: { vehicle_make: make,
                        vehicle_year: year,
-                       vehcile_model: model,
+                       vehicle_model: model,
                        body_style: body},
             
           });
-    }
+          
+    };
 
-
+console.log(year, make, model, body)
     return (
         <>
         <Container   style={{ marginTop: '4rem' }} >
@@ -44,7 +46,7 @@ function AddVehicle () {
           
         </select>
            <br />
-      <button type="submit">Submit</button>
+      <button onClick={AddVehicle} type="submit">Submit</button>
             
 
         </form>
