@@ -19,10 +19,8 @@ function* postVehicle (action) {
     yield put ({type: 'FETCH_VEHICLES' });
     console.log('Done with FETCH_VECHILES');
     
-    action.setMake('');
-    action.setModel('');
-    action.setYear('');
-    action.setBody('');
+    action.clearForm();
+   
   } catch (error) {
     console.log(`error in postVehicle`);
     alert('Something went wrong');
