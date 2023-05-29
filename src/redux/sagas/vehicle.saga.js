@@ -11,6 +11,17 @@ function* fetchVehicles () {
     }
   };
 
+  function* fetchSelectedVehicle (action) {
+    const carId = action.payload.vehicleId;
+    try {
+      const selection = yield axios.get(`/api/vehicle/${carId}`);
+      yield put({type: 'SET_SELECTION', payload: selection.data});
+    } catch (error) {
+      console.log(`error in fetchSelection: ${error}`)
+      alert('Something went wrong')
+    }
+  }
+
 function* postVehicle (action) {
   console.log('in postVehicle', action.payload)
   try {
@@ -40,14 +51,12 @@ function* fetchCarHistory (action) {
   }
 }
 
-function* getVehicleSelection (action) {
-
-}
 
 function* garageSaga(){
     yield takeEvery('FETCH_VEHICLES', fetchVehicles);
     yield takeEvery('ADD_VEHICLE', postVehicle);
-    yield takeEvery('FETCH_CAR_HISTORY', fetchCarHistory )
+    yield takeEvery('FETCH_CAR_HISTORY', fetchCarHistory );
+    yield takeEvery('FETCH_SELECTED_VEHICLE', fetchSelectedVehicle)
 };
 
 export default garageSaga;
