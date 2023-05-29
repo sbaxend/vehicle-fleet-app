@@ -25,11 +25,29 @@ function* postVehicle (action) {
     console.log(`error in postVehicle`);
     alert('Something went wrong');
   }
+};
+
+function* fetchCarHistory (action) {
+  console.log('IN fetchCarHistory');
+  const carId = action.payload.vehicleId
+  console.log('History Vehicle ID:', carId)
+  try {
+    const history = yield axios.get(`/api/vehicle/history/${carId}`)
+    yield put ({type: 'SET_HISTORY', payload: history.data})
+  } catch (error) {
+    console.log(`error in fetchCarHistory: ${error}`);
+    alert('Something went wrong.');
+  }
+}
+
+function* getVehicleSelection (action) {
+
 }
 
 function* garageSaga(){
     yield takeEvery('FETCH_VEHICLES', fetchVehicles);
-    yield takeEvery('ADD_VEHICLE', postVehicle)
+    yield takeEvery('ADD_VEHICLE', postVehicle);
+    yield takeEvery('FETCH_CAR_HISTORY', fetchCarHistory )
 };
 
 export default garageSaga;

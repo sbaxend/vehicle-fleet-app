@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 const vehicleList = (state = [], action) => {
     switch (action.type) {
         case 'SET_VEHICLES':
@@ -8,4 +10,23 @@ const vehicleList = (state = [], action) => {
     }
 }; 
 
-export default vehicleList;
+const selectedVehicleHistory = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_HISTORY':
+            return action.payload;
+        // case 'CLEAR_CAR_HISTORY' :
+        //     return [];
+        default:
+            return state
+    }
+};
+
+
+
+
+
+
+export default combineReducers({
+    vehicleList,
+    selectedVehicleHistory
+})
