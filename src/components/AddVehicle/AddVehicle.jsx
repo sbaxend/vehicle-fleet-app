@@ -17,7 +17,7 @@ function AddVehicle () {
     }
 
     const AddVehicle = () => {
-
+        if (make && model && year && body) {
         dispatch({
             type: 'ADD_VEHICLE',
             payload: { vehicle_make: make,
@@ -26,6 +26,9 @@ function AddVehicle () {
                        body_style: body},
             clearForm,
           });
+         } else {
+            alert('Please fill out all input fields');
+          }
           
     };
 
@@ -36,10 +39,10 @@ console.log(year, make, model, body)
 
         <h1>ADD PAGE</h1>
         <form>
-           Year: <input value={year} onChange={evt => setYear(evt.target.value)} type="number"  max="2099" ></input>
-           Make:<input value={make} onChange={evt => setMake(evt.target.value)}type="text"></input>
-           Model: <input value={model} onChange={evt => setModel(evt.target.value)}type="text"></input>
-           Body: <select value={body} onChange={evt => setBody(evt.target.value)}>
+           Year: <input value={year} onChange={evt => setYear(evt.target.value)} type="number"  max="2099" required></input>
+           Make:<input value={make} onChange={evt => setMake(evt.target.value)}type="text" required></input>
+           Model: <input value={model} onChange={evt => setModel(evt.target.value)}type="text" required></input>
+           Body: <select value={body} onChange={evt => setBody(evt.target.value)} required>
           <option >Select Body Style</option>
           <option>Cargo Van</option>
           <option>Convertible</option>

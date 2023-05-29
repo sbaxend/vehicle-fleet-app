@@ -9,6 +9,7 @@ import Card from '@mui/material/Card';
 import Grow from '@mui/material/Grow';
 import AddIcon from '@mui/icons-material/Add';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
@@ -21,6 +22,8 @@ function UserPage() {
   }, []);
 
   console.log(vehicles)
+
+ 
 
   const navToAdd = (event) => {
     event.preventDefault();
