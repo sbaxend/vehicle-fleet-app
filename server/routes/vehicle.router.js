@@ -65,4 +65,21 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   });
 });
 
+/**
+ * DELETE route
+ */
+router.delete('/:carId', rejectUnauthenticated, (res, req) => {
+  const carId = req.params.carId;
+  let history = 'DELETE * FROM history WHERE car_id = $1;';
+  let wishlist ='DELETE * FROM "wishlist" WHERE car_id = $1;';
+  let car = 'DELETE * FROM "cars" WHERE "id" = $1;'
+})
+
+/**
+ * PUT route
+ */
+
+router.put('/:carId', rejectUnauthenticated, (res, req) => {
+
+})
 module.exports = router;
