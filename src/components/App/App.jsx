@@ -106,7 +106,7 @@ function App() {
           <Route exact path="/add-vehicle">
             {user.id ? <AddVehicle /> : <LandingPage />}
           </Route>
-          <Route exact path ="/details">
+          <Route exact path ="/details/:vehicleId">
             <VehicleDetails />
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}

@@ -5,13 +5,44 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * GET route template
  */
+// SELECT ALL VEHICLES REQUEST
 router.get('/', rejectUnauthenticated, (req, res) => {
   // GET route code here
   console.log('req.user', req.user);
-  let queryText = 'SELECT * from "cars" WHERE "user_id" = $1;'
-  pool.query(queryText, [req.user.id]).then((results) => 
-  res.send(results.rows)).catch((error) => {
-    console.log(`Error making SELECT for cars:`, error);
+  let queryText = 'SELECT * FROM "cars" WHERE "user_id" = $1;'
+  pool.query(queryText, [req.user.id]).then((results) =>
+    res.send(results.rows)).catch((error) => {
+      console.log(`Error making SELECT for cars:`, error);
+      res.sendStatus(500);
+    })
+});
+
+// SELECT INDIVIDUAL VEHICLE REQUEST
+router.get('/:carId', (req, res) => {
+  const carId = req.params.carId;
+  let queryText = 'SELECT FROM "cars" WHERE "id" = $1;';
+  pool.query(queryText, [carId]).then((results) => res.send(results.rows)).catch((error) => {
+    console.log(`Error making Select vehicle request:`, error);
+    res.sendStatus(500);
+  })
+})
+// SELECT HISTORY REQUEST
+router.get('/history/:carId', (req, res) => {
+  const carId = req.params.carId
+  console.log(carId)
+  let queryText = 'SELECT * FROM "history" WHERE "car_id" = $1;'
+  pool.query(queryText, [carId]).then((results) => res.send(results.rows)).catch((error) => {
+    console.log(`Error making vehicle history request:`, error);
+    res.sendStatus(500);
+  })
+
+});
+// SELECT WISHLIST REQUEST
+router.get('/wishlist/:carId', (req, res) => {
+  const carId = req.params.carId;
+  let queryText = 'SELECT * FROM "wishlist" WHERE "car_id" = $1;';
+  pool.query(queryText, [carId]).then((results) => res.send(results.rows)).catch((error) => {
+    console.log(`Error making vehicle wishlist request:`, error);
     res.sendStatus(500);
   })
 });
@@ -24,13 +55,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('req.user', req.user)
   console.log(req.body)
   let queryText = 'INSERT INTO "cars" ("vehicle_make", "vehicle_year", "vehicle_model","body_style", "user_id") VALUES ($1, $2, $3, $4, $5)'
-  let {vehicle_make, vehicle_year, vehicle_model, body_style} = req.body
+  let { vehicle_make, vehicle_year, vehicle_model, body_style } = req.body
   pool.query(queryText, [vehicle_make, vehicle_year, vehicle_model, body_style, req.user.id]).then((results) => {
     res.sendStatus(200);
   }).catch((error) => {
     console.log(error);
     res.sendStatus(500);
-});
+  });
 });
 
 module.exports = router;
