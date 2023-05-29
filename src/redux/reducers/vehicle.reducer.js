@@ -21,6 +21,14 @@ const selectedVehicleHistory = (state = [], action) => {
     }
 };
 
+const selectedVehicle = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_SELECTION':
+            return action.payload;
+        default:
+            return state
+    }
+};
 
 
 
@@ -28,5 +36,6 @@ const selectedVehicleHistory = (state = [], action) => {
 
 export default combineReducers({
     vehicleList,
-    selectedVehicleHistory
+    selectedVehicleHistory,
+    selectedVehicle
 })

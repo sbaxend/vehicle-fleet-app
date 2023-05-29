@@ -18,9 +18,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 // SELECT INDIVIDUAL VEHICLE REQUEST
-router.get('/:carId', (req, res) => {
+router.get('/:carId', rejectUnauthenticated, (req, res) => {
   const carId = req.params.carId;
-  let queryText = 'SELECT FROM "cars" WHERE "id" = $1;';
+  console.log('carId is', carId)
+  let queryText = 'SELECT * FROM "cars" WHERE "id" = $1;';
   pool.query(queryText, [carId]).then((results) => res.send(results.rows)).catch((error) => {
     console.log(`Error making Select vehicle request:`, error);
     res.sendStatus(500);
