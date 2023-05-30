@@ -6,7 +6,9 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 function VehicleDetails () {
-const  carId  = useParams()
+// const  carId  = useParams()
+//this extracts from the carId
+const { vehicleId } = useParams();
 const dispatch = useDispatch();
 const info = useSelector((store) => store.vehicles.selectedVehicleHistory);
 const selection = useSelector((store) => store.vehicles.selectedVehicle)
@@ -22,9 +24,29 @@ const deleteVehicle = (vehicleId) => {
     history.push('/user')
   }
 
+const submitHistory = (event) => {
+    event.preventDefault()
+    // let vehicleId = carId.vehicleId
+    console.log('In submitHistory. car id is:', vehicleId)
+    dispatch(
+        {
+            type: 'ADD_HISTORY',
+            payload: {
+              vehicleId: vehicleId,
+              history_date: date,
+              history_description: description,
+              history_notes: notes,
+            },
+          }
+    )
+    
+}
+
+console.log(vehicleId)
 useEffect(() => {
-    dispatch({ type: 'FETCH_CAR_HISTORY', payload: carId });
-    dispatch({type: 'FETCH_SELECTED_VEHICLE', payload: carId})
+    dispatch({ type: 'FETCH_CAR_HISTORY', payload: vehicleId  });
+    console.log('Fetching car history');
+    dispatch({type: 'FETCH_SELECTED_VEHICLE', payload: vehicleId })
   }, []);
 
     return (
@@ -41,7 +63,30 @@ useEffect(() => {
             ))}
             <Button onClick={deleteVehicle}>Delete Vehicle</Button>
         </div>
-        <input></input> <input></input> <input></input> <button>Add</button>
+        <form onSubmit={submitHistory}>
+        <input
+          value={date}
+          onChange={(evt) => setDate(evt.target.value)}
+          type="date"
+          placeholder="Date"
+          required
+        />
+        <input
+          value={description}
+          onChange={(evt) => setDescription(evt.target.value)}
+          type="text"
+          placeholder="Description"
+          required
+        />
+        <input
+          value={notes}
+          onChange={(evt) => setNotes(evt.target.value)}
+          type="text"
+          placeholder="Notes"
+          
+        />
+        <button type="submit">Add</button>
+      </form>
         <table>
       <thead>
         <tr>
