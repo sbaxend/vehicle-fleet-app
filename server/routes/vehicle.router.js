@@ -28,9 +28,9 @@ router.get('/:carId', rejectUnauthenticated, (req, res) => {
   })
 })
 // SELECT HISTORY REQUEST
-router.get('/history/:carId', (req, res) => {
-  const carId = req.params.carId
-  console.log(carId)
+router.get('/history/:vehicleId', (req, res) => {
+  const carId = req.params.vehicleId
+  console.log('in get request for selected history. id:', carId)
   let queryText = 'SELECT * FROM "history" WHERE "car_id" = $1;'
   pool.query(queryText, [carId]).then((results) => res.send(results.rows)).catch((error) => {
     console.log(`Error making vehicle history request:`, error);
@@ -64,11 +64,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     res.sendStatus(500);
   });
 });
+// HISTORY POST
+router.post('/history/:vehicleId', rejectUnauthenticated, (req, res) => {
+  let carId = req.params.vehicleId
+  console.log('history carId is', carId)
+  let queryText = 'INSERT INTO "history" ("car_id", "history_description", "history_notes", "history_date") VALUES ($1, $2, $3, $4);';
+  let { history_description, history_notes, history_date} = req.body
+  pool.query(queryText, [carId, history_description, history_notes, history_date]).then((results) => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
+})
 
 /**
  * DELETE route
  */
-router.delete('/:carId', rejectUnauthenticated, (res, req) => {
+router.delete('/:carId', rejectUnauthenticated, (req, res) => {
   const carId = req.params.carId;
   let history = 'DELETE * FROM history WHERE car_id = $1;';
   let wishlist ='DELETE * FROM "wishlist" WHERE car_id = $1;';
