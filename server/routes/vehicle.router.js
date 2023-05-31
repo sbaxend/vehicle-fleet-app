@@ -81,13 +81,39 @@ router.post('/history/:vehicleId', rejectUnauthenticated, (req, res) => {
 /**
  * DELETE route
  */
-router.delete('/:carId', rejectUnauthenticated, (req, res) => {
-  const carId = req.params.carId;
-  let history = 'DELETE * FROM history WHERE car_id = $1;';
-  let wishlist ='DELETE * FROM "wishlist" WHERE car_id = $1;';
-  let car = 'DELETE * FROM "cars" WHERE "id" = $1;'
-})
+router.delete('/history/:vehicleId', rejectUnauthenticated, (req, res) => {
+  const carId = req.params.vehicleId;
+  console.log('In delete request history', carId)
+  const queryText = 'DELETE FROM "history" WHERE car_id = $1;';
+  pool.query(queryText, [carId]).then(() => {
+      res.sendStatus(200);
+    }).catch((error) => {
+      console.error('Error deleting history:', error);
+      res.sendStatus(500);
+    });
+});
 
+router.delete('/wishlist/:vehicleId', rejectUnauthenticated, (req, res) => {
+  const carId = req.params.vehicleId;
+  let queryText ='DELETE FROM "wishlist" WHERE car_id = $1;';
+  pool.query(queryText, [carId]).then(() => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.error('Error deleting history:', error);
+    res.sendStatus(500);
+  });
+});
+ 
+router.delete('/car/:vehicleId', rejectUnauthenticated, (req, res) => {
+  const carId = req.params.vehicleId;
+  let queryText = 'DELETE FROM "cars" WHERE "id" = $1;'
+  pool.query(queryText, [carId]).then(() => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.error('Error deleting history:', error);
+    res.sendStatus(500);
+  });
+});
 /**
  * PUT route
  */

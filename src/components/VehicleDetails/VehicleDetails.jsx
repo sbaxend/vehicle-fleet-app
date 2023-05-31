@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
+import Swal from 'sweetalert2'
 function VehicleDetails () {
 // const  carId  = useParams()
 //this extracts from the carId
@@ -20,8 +21,25 @@ const [notes, setNotes] = useState('');
 console.log(selection)
 
 const deleteVehicle = (vehicleId) => {
-    // dispatch({ type: 'DELETE_VEHICLE', payload: vehicleId });
-    history.push('/user')
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'This action will delete everything related to the vehicle. Are you sure you want to proceed?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'red',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Dispatch the action to delete the vehicle
+          dispatch({ type: 'DELETE_VEHICLE', payload: {vehicleId: vehicleId} });
+          console.log('In deleteVehicle function. ID:', vehicleId)
+    
+          // Redirect to '/user'
+          history.push('/user');
+        }
+      });
   }
 
 const submitHistory = (event) => {
@@ -61,7 +79,7 @@ useEffect(() => {
                 <h3>Body Style: {vehicle.body_style}</h3>
                 </Card>
             ))}
-            <Button onClick={deleteVehicle}>Delete Vehicle</Button>
+            <Button onClick={() => deleteVehicle(vehicleId)}>Delete Vehicle</Button>
         </div>
         <form onSubmit={submitHistory}>
         <input
