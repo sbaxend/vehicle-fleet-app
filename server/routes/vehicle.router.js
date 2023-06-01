@@ -118,7 +118,18 @@ router.delete('/car/:vehicleId', rejectUnauthenticated, (req, res) => {
  * PUT route
  */
 
-router.put('/:carId', rejectUnauthenticated, (res, req) => {
+router.put('/car/:vehicleId', rejectUnauthenticated, (req, res) => {
+  const carId = req.params.vehicleId;
+  console.log('In put Route for car info, ID:', carId)
+  let { vehicle_make, vehicle_year, vehicle_model, body_style } = req.body
+  console.log(req.body)
+  let queryText = 'UPDATE "cars" SET "vehicle_make" = $1, "vehicle_year" = $2, "vehicle_model" = $3, "body_style" = $4 WHERE "id" = $5;'
+  pool.query(queryText, [vehicle_make, vehicle_year, vehicle_model, body_style, carId]).then(() => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.error('Error updating car', error);
+    res.sendStatus(500);
+  });
+});
 
-})
 module.exports = router;

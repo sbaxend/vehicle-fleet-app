@@ -6,19 +6,21 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2'
+import VehicleEdit from './VehicleEdit';
 function VehicleDetails () {
 // const  carId  = useParams()
 //this extracts from the carId
 const { vehicleId } = useParams();
 const dispatch = useDispatch();
 const info = useSelector((store) => store.vehicles.selectedVehicleHistory);
-const selection = useSelector((store) => store.vehicles.selectedVehicle)
+
 const history = useHistory();
 const [date, setDate] = useState('');
 const [description, setDescription] = useState('');
 const [notes, setNotes] = useState('');
 
-console.log(selection)
+
+
 
 const deleteVehicle = (vehicleId) => {
     Swal.fire({
@@ -58,7 +60,9 @@ const submitHistory = (event) => {
           }
     )
     
-}
+};
+
+
 
 console.log(vehicleId)
 useEffect(() => {
@@ -70,17 +74,8 @@ useEffect(() => {
     return (
         <Container style={{ marginTop: '4rem' }}>
         <Card>  <h2>WELCOME TO DETAILS</h2></Card>
-        <div>
-            {selection.map((vehicle) => (
-                <Card key={vehicle.id}>
-                <h3>Year: {vehicle.vehicle_year}</h3>
-                <h3>Make: {vehicle.vehicle_make}</h3>
-                <h3>Model: {vehicle.vehicle_model}</h3>
-                <h3>Body Style: {vehicle.body_style}</h3>
-                </Card>
-            ))}
+        <VehicleEdit />
             <Button onClick={() => deleteVehicle(vehicleId)}>Delete Vehicle</Button>
-        </div>
         <form onSubmit={submitHistory}>
         <input
           value={date}

@@ -87,6 +87,25 @@ function* deleteAll (action) {
   }
 }
 
+function* updateCarInfo(action) {
+  const vehicleId = action.payload.vehicleId;
+  console.log('IN updateCarInfo Saga. ID:', vehicleId);
+  try { 
+    yield axios.put(`/api/vehicle/car/${vehicleId}`, {
+      vehicle_make: action.payload.vehicle_make, 
+      vehicle_year: action.payload.vehicle_year, 
+      vehicle_model:action.payload.vehicle_model, 
+      body_style: action.payload.body_style
+    });
+    console.log('CAR UPDATED')
+    yield put({type: 'FETCH_SELECTED_CAR'});
+    console.log('SELECTION FETCHED')
+   } catch (error) {
+    console.log(`error in UpdateCarInfo`);
+    alert('Something went wrong')
+  }
+}
+
 
 
 function* garageSaga(){
@@ -96,6 +115,7 @@ function* garageSaga(){
     yield takeEvery('FETCH_SELECTED_VEHICLE', fetchSelectedVehicle);
     yield takeEvery('ADD_HISTORY', postHistory);
     yield takeEvery('DELETE_VEHICLE', deleteAll );
+    yield takeEvery('SEND_UPDATED_CAR', updateCarInfo)
 };
 
 export default garageSaga;
