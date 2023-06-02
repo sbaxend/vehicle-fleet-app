@@ -9,17 +9,21 @@ import Card from '@mui/material/Card';
 import Grow from '@mui/material/Grow';
 import AddIcon from '@mui/icons-material/Add';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
-  const vehicles = useSelector((store) => store.vehicleList)
+  const vehicles = useSelector((store) => store.vehicles.vehicleList)
   const dispatch = useDispatch();
   const history = useHistory();
+  
   useEffect(() => {
     dispatch({ type: 'FETCH_VEHICLES' });
   }, []);
 
   console.log(vehicles)
+
+ 
 
   const navToAdd = (event) => {
     event.preventDefault();
@@ -28,9 +32,10 @@ function UserPage() {
 
   }
 
-  const navToDetails =(event) => {
+  const navToDetails = (vehicleId) => (event) => {
     event.preventDefault();
-    history.push('/details')
+    history.push(`/details/${vehicleId}`)
+   
   }
 
 
@@ -49,7 +54,7 @@ function UserPage() {
         {vehicles.map((vehicle, index) => (
           <Grid item xs={12} sm={6} md={4} key={vehicle.id}>
             <Grow in={true} timeout={1000} {...{ appear: true }} {...{ timeout: 1000 * index }}>
-          <Card className='vehicle-card' elevation={3} onClick={navToDetails}>
+          <Card className='vehicle-card' elevation={3} onClick={navToDetails(vehicle.id)}>
           <ListItem key={vehicle.id}>
             <DirectionsCarIcon/>{vehicle.vehicle_year} {vehicle.vehicle_make} {vehicle.vehicle_model} 
           </ListItem>
