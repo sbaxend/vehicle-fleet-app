@@ -9,14 +9,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { AppBar, Toolbar, Typography} from '@mui/material';
+import { Typography} from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function TemporaryDrawer() {
