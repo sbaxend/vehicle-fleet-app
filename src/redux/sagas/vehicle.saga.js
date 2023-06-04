@@ -44,7 +44,7 @@ function* postVehicle (action) {
     yield put ({type: 'FETCH_VEHICLES' });
     console.log('Done with FETCH_VECHILES');
     
-    action.clearForm();
+    
    
   } catch (error) {
     console.log(`error in postVehicle`);

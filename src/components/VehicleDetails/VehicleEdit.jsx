@@ -88,10 +88,12 @@ const updateCarInfo = () => {
                 <option>Cargo Van</option>
                 <option>Convertible</option>
                 <option>Coupe</option>
+                <option>Crossover</option>
                 <option>Hatchback</option>
                 <option>Minivan</option>
                 <option>Truck</option>
                 <option>Sedan</option>
+                <option>SUV</option>
                 <option>Wagon</option>
               </select>
                  <Button onClick={() => { updateCarInfo(); toggleEditMode(); }}>Save</Button>

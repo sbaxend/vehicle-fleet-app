@@ -38,7 +38,7 @@ function AddVehicle () {
                 body_style: body,
               },
             });
-            clearForm();
+            clearForm;
             setShowAlert(true); 
           } else {
             alert('Please fill out all input fields');
@@ -93,10 +93,12 @@ console.log(year, make, model, body)
             <MenuItem value="Cargo Van">Cargo Van</MenuItem>
             <MenuItem value="Convertible">Convertible</MenuItem>
             <MenuItem value="Coupe">Coupe</MenuItem>
+            <MenuItem value="Cross">Crossover</MenuItem>
             <MenuItem value="Hatchback">Hatchback</MenuItem>
             <MenuItem value="Minivan">Minivan</MenuItem>
             <MenuItem value="Truck">Truck</MenuItem>
             <MenuItem value="Sedan">Sedan</MenuItem>
+            <MenuItem value="SUV">SUV</MenuItem>
             <MenuItem value="Wagon">Wagon</MenuItem>
           </Select>
         </FormControl>
