@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Container from '@mui/material/Container';
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +20,7 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
+    <Container style={{ marginTop: '5rem' }}>
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
@@ -55,6 +56,7 @@ function RegisterForm() {
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
     </form>
+    </Container>
   );
 }
 

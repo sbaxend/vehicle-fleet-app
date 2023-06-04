@@ -4,6 +4,16 @@ import { useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button'
 import { useHistory } from "react-router-dom";
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar'
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import { deepOrange, green } from '@mui/material/colors';
+
 function VehicleEdit () {
 const dispatch = useDispatch();
 const history = useHistory();
@@ -57,64 +67,84 @@ const updateCarInfo = () => {
         setEditBody(selection[0].body_style);
       };
     return (
-        <div>
-            {selection.map((vehicle) => (
-                <Card key={vehicle.id}>
-                    {editMode ? ( 
-              <>
-               <input
-                value={editYear}
-                onChange={(evt) => setEditYear(evt.target.value)}
-                type="number"
-                placeholder="Year"
-              />
-              <br />
-              <input
-                value={editMake}
-                onChange={(evt) => setEditMake(evt.target.value)}
-                type="text"
-                placeholder="Make"
-              />
-              <br />
-              <input
-                value={editModel}
-                onChange={(evt) => setEditModel(evt.target.value)}
-                type="text"
-                placeholder="Model"
-              />
-              <br />
-              <select value={editBody} onChange={(evt) => setEditBody(evt.target.value)}>
-                <option>Select Body Style</option>
-                <option>Cargo Van</option>
-                <option>Convertible</option>
-                <option>Coupe</option>
-                <option>Crossover</option>
-                <option>Hatchback</option>
-                <option>Minivan</option>
-                <option>Truck</option>
-                <option>Sedan</option>
-                <option>SUV</option>
-                <option>Wagon</option>
-              </select>
-                 <Button onClick={() => { updateCarInfo(); toggleEditMode(); }}>Save</Button>
+        <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {selection.map((vehicle) => (
+          <Card key={vehicle.id} style={{ marginBottom: '1rem', padding: '1rem', width: '400px', position: 'relative' }}>
+            {editMode ? (
+                <>
+                <TextField
+                  value={editYear}
+                  onChange={(evt) => setEditYear(evt.target.value)}
+                  type="number"
+                  label="Year"
+                  fullWidth
+                  sx={{ marginBottom: '0.5rem' }}
+                />
+                <TextField
+                  value={editMake}
+                  onChange={(evt) => setEditMake(evt.target.value)}
+                  type="text"
+                  label="Make"
+                  fullWidth
+                  sx={{ marginBottom: '0.5rem' }}
+                />
+                <TextField
+                  value={editModel}
+                  onChange={(evt) => setEditModel(evt.target.value)}
+                  type="text"
+                  label="Model"
+                  fullWidth
+                  sx={{ marginBottom: '0.5rem' }}
+                />
+                <FormControl fullWidth sx={{ marginBottom: '0.5rem' }}>
+                  <InputLabel>Select Body Style</InputLabel>
+                  <Select value={editBody} onChange={(evt) => setEditBody(evt.target.value)}>
+                    <MenuItem value="">Select Body Style</MenuItem>
+                    <MenuItem value="Cargo Van">Cargo Van</MenuItem>
+                    <MenuItem value="Convertible">Convertible</MenuItem>
+                    <MenuItem value="Coupe">Coupe</MenuItem>
+                    <MenuItem value="Crossover">Crossover</MenuItem>
+                    <MenuItem value="Hatchback">Hatchback</MenuItem>
+                    <MenuItem value="Minivan">Minivan</MenuItem>
+                    <MenuItem value="Truck">Truck</MenuItem>
+                    <MenuItem value="Sedan">Sedan</MenuItem>
+                    <MenuItem value="SUV">SUV</MenuItem>
+                    <MenuItem value="Wagon">Wagon</MenuItem>
+                  </Select>
+                </FormControl>
+                <Button onClick={() => { updateCarInfo(); toggleEditMode(); }} variant="contained" sx={{ marginBottom: '0.5rem' }}>
+                  Save
+                </Button>
               </>
             ) : (
-              <>
-                <h3>Year: {vehicle.vehicle_year}</h3>
-                <h3>Make: {vehicle.vehicle_make}</h3>
-                <h3>Model: {vehicle.vehicle_model}</h3>
-                <h3>Body Style: {vehicle.body_style}<Button onClick={toggleEditMode}>Edit</Button></h3> 
-                
+                <>
+                <Avatar
+                sx={{ position: 'absolute', top: '0', left: '0', margin: '0.5rem', width: 56, height: 56, bgcolor: green[500] }}><DirectionsCarIcon/></Avatar>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{alignItems: 'left'}}>
+                <Typography  variant="h5" sx={{ marginBottom: '0.5rem' }}>
+                  Year: {vehicle.vehicle_year}
+                </Typography>
+                <Typography variant="h5" sx={{ marginBottom: '0.5rem' }}>
+                  Make: {vehicle.vehicle_make}
+                </Typography>
+                <Typography variant="h5" sx={{ marginBottom: '0.5rem' }}>
+                  Model: {vehicle.vehicle_model}
+                </Typography>
+                <Typography variant="h5" sx={{ marginBottom: '0.5rem' }}>
+                  Body Style: {vehicle.body_style}
+                </Typography>
+                <Button onClick={toggleEditMode} variant="outlined"
+                style={{ position: 'absolute', top: '0', right: '0', margin: '0.5rem' }}>
+                  Edit
+                </Button>
+                </div>
+              </div>
               </>
             )}
-
-                {/* <h3>Year: {vehicle.vehicle_year}</h3>
-                <h3>Make: {vehicle.vehicle_make}</h3>
-                <h3>Model: {vehicle.vehicle_model}</h3>
-                <h3>Body Style: {vehicle.body_style}</h3> */}
-                </Card>
-            ))}
-        </div>
+          </Card>
+        ))}
+      </div>
     )
 }
 export default VehicleEdit;
