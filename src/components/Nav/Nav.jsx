@@ -13,7 +13,7 @@ function Nav() {
     <AppBar position='fixed'>
       <Toolbar>
          <TemporaryDrawer/>
-      <Typography variant='h4'>Welcome {user.username}!</Typography>
+      <Typography variant='h4'>Welcome {user.username}</Typography>
       </Toolbar>
     </AppBar>
   );

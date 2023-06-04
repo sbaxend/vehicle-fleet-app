@@ -111,7 +111,7 @@ useEffect(() => {
       <tbody>
         {info.map((item) => (
           <tr key={item.id}>
-            <td>{item.history_date}</td>
+            <td>{new Date(item.history_date).toLocaleDateString()}</td>
             <td>{item.history_description}</td>
             <td>{item.history_notes}</td>
           </tr>
