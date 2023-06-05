@@ -31,7 +31,7 @@ router.get('/:carId', rejectUnauthenticated, (req, res) => {
 router.get('/history/:vehicleId', (req, res) => {
   const carId = req.params.vehicleId
   console.log('in get request for selected history. id:', carId)
-  let queryText = 'SELECT * FROM "history" WHERE "car_id" = $1;'
+  let queryText = 'SELECT * FROM "history" WHERE "car_id" = $1 ORDER BY "history_date" DESC;'
   pool.query(queryText, [carId]).then((results) => res.send(results.rows)).catch((error) => {
     console.log(`Error making vehicle history request:`, error);
     res.sendStatus(500);

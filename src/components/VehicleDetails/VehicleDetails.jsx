@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2'
 import VehicleEdit from './VehicleEdit';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -15,6 +15,8 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import  Divider  from '@mui/material/Divider';
 function VehicleDetails () {
 // const  carId  = useParams()
 //this extracts from the carId
@@ -82,10 +84,11 @@ useEffect(() => {
     return (
         <Container style={{ marginTop: '4rem' }}>
     <VehicleEdit />
-    <Button onClick={() => deleteVehicle(vehicleId)}>Delete Vehicle</Button>
-    <Typography variant="h4" align="center" sx={{ mt: 2 }}>
-      Add More Info
+    <Button startIcon={<DeleteIcon />} onClick={() => deleteVehicle(vehicleId)} style={{ backgroundColor: 'red', color: 'white' }}>Delete Vehicle</Button>
+    <Typography variant="h6" align="left" sx={{ mt: 2 }}>
+      Add Your Vehicle History 
       </Typography>
+      <Typography variant="h8">(Mainteenance, purchased Items, oil changes, etc.)</Typography>
     <form onSubmit={submitHistory}>
       <TextField
         value={date}
@@ -112,10 +115,11 @@ useEffect(() => {
         fullWidth
         sx={{ mt: 2 }}
       />
-      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+      <Button startIcon={<AddCircleOutlineIcon/>}type="submit" variant="contained" sx={{ mt: 2 }}>
         Add
       </Button>
-      <Typography variant="h4" align="center" sx={{ mt: 2 }}>
+      <Divider />
+      <Typography variant="h6" align="left" sx={{ mt: 2 }}>
        Your Vehicle History:
       </Typography>
     </form>
