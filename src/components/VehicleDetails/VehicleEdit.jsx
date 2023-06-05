@@ -67,7 +67,7 @@ const updateCarInfo = () => {
         setEditBody(selection[0].body_style);
       };
     return (
-        <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ marginTop: '5rem', display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
         {selection.map((vehicle) => (
           <Card key={vehicle.id} style={{ marginBottom: '1rem', padding: '1rem', width: '400px', position: 'relative' }}>
             {editMode ? (

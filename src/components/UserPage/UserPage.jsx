@@ -1,7 +1,7 @@
 import React from 'react';
 import './UserPage.css';
 import {useDispatch, useSelector} from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Container from '@mui/material/Container';
 import { ListItem, Grid, Button} from '@mui/material';
@@ -9,14 +9,17 @@ import Card from '@mui/material/Card';
 import Grow from '@mui/material/Grow';
 import AddIcon from '@mui/icons-material/Add';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const vehicles = useSelector((store) => store.vehicles.vehicleList)
   const dispatch = useDispatch();
   const history = useHistory();
-  
+  const [selectedBodyStyle, setSelectedBodyStyle] = useState('');
+
   useEffect(() => {
     dispatch({ type: 'FETCH_VEHICLES' });
   }, []);
@@ -37,21 +40,28 @@ function UserPage() {
     history.push(`/details/${vehicleId}`)
    
   }
-
+  const filteredVehicles = selectedBodyStyle ? vehicles.filter(vehicle => vehicle.body_style === selectedBodyStyle) : vehicles;
 
   return (
     
     <Container className="container" style={{ marginTop: '4rem' }}>
-    {/* <ul>
-    {vehicles.map(vehicle => (
-      <li key={vehicle.id}>
-       {vehicle.vehicle_year} {vehicle.vehicle_make} {vehicle.vehicle_model}
-      </li>
-    ))}
-  </ul> */}
+   <InputLabel>SORT BY</InputLabel>
+          <Select alue={selectedBodyStyle} onChange={(event) => setSelectedBodyStyle(event.target.value)}>
+            <MenuItem value="">All</MenuItem>
+            <MenuItem value="Cargo Van">Cargo Van</MenuItem>
+            <MenuItem value="Convertible">Convertible</MenuItem>
+            <MenuItem value="Coupe">Coupe</MenuItem>
+            <MenuItem value="Cross">Crossover</MenuItem>
+            <MenuItem value="Hatchback">Hatchback</MenuItem>
+            <MenuItem value="Minivan">Minivan</MenuItem>
+            <MenuItem value="Truck">Truck</MenuItem>
+            <MenuItem value="Sedan">Sedan</MenuItem>
+            <MenuItem value="SUV">SUV</MenuItem>
+            <MenuItem value="Wagon">Wagon</MenuItem>
+          </Select>
   
   <Grid container spacing={2}>
-        {vehicles.map((vehicle, index) => (
+        {filteredVehicles.map((vehicle, index) => (
           <Grid item xs={12} sm={6} md={4} key={vehicle.id}>
             <Grow in={true} timeout={1000} {...{ appear: true }} {...{ timeout: 1000 * index }}>
           <Card className='vehicle-card' elevation={3} onClick={navToDetails(vehicle.id)}>
