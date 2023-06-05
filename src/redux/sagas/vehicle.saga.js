@@ -71,19 +71,30 @@ function* postHistory (action) {
 }
 
 function* deleteAll (action) {
-  const vehicleId = action.payload.vehicleId;
-  console.log('In deleteAll car id is:', vehicleId)
+  const hehicleId = action.payload.vehicleId;
+  console.log('In deleteAll car id is:', hehicleId)
   try {
-    yield axios.delete(`/api/vehicle/history/${vehicleId}`);
+    yield axios.delete(`/api/vehicle/history/${hehicleId}`);
     console.log('History Cleared');
-    yield axios.delete(`/api/vehicle/wishlist/${vehicleId}`);
+    yield axios.delete(`/api/vehicle/wishlist/${hehicleId}`);
     console.log('Wishlist Cleared');
-    yield axios.delete(`/api/vehicle/car/${vehicleId}`);
+    yield axios.delete(`/api/vehicle/car/${hehicleId}`);
     console.log('Car Deletion Completed');
     yield put ({type: 'FETCH_VEHICLES' });
   } catch (error) {
     console.log(`error in deleteAll`);
     alert('Something went wrong')
+  }
+};
+
+function* deleteHistory (action) {
+  let vehicleId = action.payload.vehicleId
+  let historyId = action.payload.historyId
+  try {
+    yield axios.delete(`/api/vehicle/past/${historyId}`)
+    yield put({type: 'FETCH_CAR_HISTORY', payload:vehicleId})
+  } catch (error) {
+    console.log('Error in deleteHistory')
   }
 }
 
@@ -115,7 +126,8 @@ function* garageSaga(){
     yield takeEvery('FETCH_SELECTED_VEHICLE', fetchSelectedVehicle);
     yield takeEvery('ADD_HISTORY', postHistory);
     yield takeEvery('DELETE_VEHICLE', deleteAll );
-    yield takeEvery('SEND_UPDATED_CAR', updateCarInfo)
+    yield takeEvery('SEND_UPDATED_CAR', updateCarInfo);
+    yield takeEvery('HISTORY_DELETE', deleteHistory)
 };
 
 export default garageSaga;

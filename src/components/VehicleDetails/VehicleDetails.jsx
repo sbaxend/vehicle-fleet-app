@@ -72,6 +72,17 @@ const submitHistory = (event) => {
     
 };
 
+const deleteHistory = (historyId) => {
+    event.preventDefault();
+    console.log('In deleteHistory. History id is:', historyId);
+    dispatch({
+        type: 'HISTORY_DELETE',
+        payload: {
+          historyId: historyId,
+          vehicleId: vehicleId
+        }
+      });
+}
 
 
 console.log(vehicleId)
@@ -85,6 +96,7 @@ useEffect(() => {
         <Container style={{ marginTop: '4rem' }}>
     <VehicleEdit />
     <Button startIcon={<DeleteIcon />} onClick={() => deleteVehicle(vehicleId)} style={{ backgroundColor: 'red', color: 'white' }}>Delete Vehicle</Button>
+    <Divider style={{ marginTop: '2rem' }} />
     <Typography variant="h6" align="left" sx={{ mt: 2 }}>
       Add Your Vehicle History 
       </Typography>
@@ -118,7 +130,8 @@ useEffect(() => {
       <Button startIcon={<AddCircleOutlineIcon/>}type="submit" variant="contained" sx={{ mt: 2 }}>
         Add
       </Button>
-      <Divider />
+      
+      <Divider style={{ marginTop: '2rem' }} />
       <Typography variant="h6" align="left" sx={{ mt: 2 }}>
        Your Vehicle History:
       </Typography>
@@ -137,6 +150,7 @@ useEffect(() => {
             <TableCell>{new Date(item.history_date).toLocaleDateString()}</TableCell>
             <TableCell>{item.history_description}</TableCell>
             <TableCell>{item.history_notes}</TableCell>
+            <TableCell><Button onClick={() => deleteHistory(item.id)}>Delete</Button></TableCell>
           </TableRow>
         ))}
       </TableBody>
