@@ -76,6 +76,19 @@ router.post('/history/:vehicleId', rejectUnauthenticated, (req, res) => {
     console.log(error);
     res.sendStatus(500);
   });
+});
+
+router.post('/wishlist/:vehicleId', rejectUnauthenticated, (req, res) => {
+  let carId = req.params.vehicleId;
+  console.log('wishlist ID is:', carId);
+  let queryText = 'INSERT INTO "wishlist" ("wishlist_description", "car_id") VALUES ($1, $2);';
+  let { wishlist_description } = req.body
+  pool.query(queryText, [wishlist_description, carId]).then((results) => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
 })
 
 /**
@@ -104,9 +117,9 @@ router.delete('/past/:historyId', rejectUnauthenticated, (req, res) => {
   });
 })
 
-router.delete('/wishlist/:vehicleId', rejectUnauthenticated, (req, res) => {
-  const carId = req.params.vehicleId;
-  let queryText ='DELETE FROM "wishlist" WHERE car_id = $1;';
+router.delete('/wish/:wishlistId', rejectUnauthenticated, (req, res) => {
+  const carId = req.params.wishlistId;
+  let queryText ='DELETE FROM "wishlist" WHERE "id" = $1;';
   pool.query(queryText, [carId]).then(() => {
     res.sendStatus(200);
   }).catch((error) => {
