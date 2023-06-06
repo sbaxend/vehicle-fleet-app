@@ -40,7 +40,11 @@ const clearForm = () => {
 const selection = useSelector((store) => store.vehicles.selectedVehicle)
 
 const [editMode, setEditMode] = useState(false);
-// console.log('Year:', selection[0].vehicle_year)
+
+const recall = () => {
+      dispatch({ type: 'FETCH_SELECTED_VEHICLE', payload: vehicleId });
+
+  };
 
 const updateCarInfo = () => {
     console.log('updateCarInfo triggered')
@@ -53,12 +57,11 @@ const updateCarInfo = () => {
       }
     dispatch({type:'SEND_UPDATED_CAR', payload: updatedCar} );
     dispatch({type: 'FETCH_SELECTED_VEHICLE', payload: vehicleId })
+    recall();
+    
   
     
 };
-
-
-
     const toggleEditMode = () => {
         setEditMode(!editMode); 
         setEditMake(selection[0].vehicle_make);
@@ -66,6 +69,7 @@ const updateCarInfo = () => {
         setEditYear(selection[0].vehicle_year);
         setEditBody(selection[0].body_style);
       };
+      
     return (
         <div style={{ marginTop: '5rem', display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
         {selection.map((vehicle) => (

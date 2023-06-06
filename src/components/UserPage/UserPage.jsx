@@ -12,6 +12,8 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
+import Typography from '@mui/material/Typography';
+
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
@@ -45,8 +47,18 @@ function UserPage() {
   return (
     
     <Container className="container" style={{ marginTop: '4rem' }}>
-   <InputLabel>SORT BY</InputLabel>
-          <Select alue={selectedBodyStyle} onChange={(event) => setSelectedBodyStyle(event.target.value)}>
+      <Card variant="outlined" sx={{ textAlign: 'center', padding: '1rem' }}>
+        <Typography variant="h4" component="div">
+          Your Garage
+        </Typography>
+      </Card>
+    <InputLabel  style={{ marginTop: '1rem' }} align="right" htmlFor="sort-by-select">SORT BY</InputLabel>
+    <Select
+      id="sort-by-select"
+      value={selectedBodyStyle}
+      onChange={(event) => setSelectedBodyStyle(event.target.value)}
+      fullWidth
+    >
             <MenuItem value="">All</MenuItem>
             <MenuItem value="Cargo Van">Cargo Van</MenuItem>
             <MenuItem value="Convertible">Convertible</MenuItem>
@@ -60,7 +72,7 @@ function UserPage() {
             <MenuItem value="Wagon">Wagon</MenuItem>
           </Select>
   
-  <Grid container spacing={2}>
+  <Grid style={{ marginTop: '1rem' }} container spacing={2}>
         {filteredVehicles.map((vehicle, index) => (
           <Grid item xs={12} sm={6} md={4} key={vehicle.id}>
             <Grow in={true} timeout={1000} {...{ appear: true }} {...{ timeout: 1000 * index }}>
@@ -75,7 +87,7 @@ function UserPage() {
       </Grid>
  
       
-      <Button onClick={navToAdd}><AddIcon/>ADD YOUR NEW VEHICLE</Button>
+      <Button style={{ marginTop: '1rem', color: 'green' }}  onClick={navToAdd}><AddIcon/>ADD YOUR NEW VEHICLE</Button>
     
    
   
