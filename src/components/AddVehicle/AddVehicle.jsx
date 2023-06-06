@@ -52,9 +52,9 @@ function AddVehicle () {
 console.log(year, make, model, body)
     return (
         <>
-        <Container   style={{ marginTop: '4rem' }} >
+        <Container   style={{ marginTop: '5rem' }} >
 
-        <h1>WHATS YOUR NEW VEHICLE?</h1>
+        <h2>Whats Your New Vehicle?</h2>
         <form>
         <TextField
           label="Year"

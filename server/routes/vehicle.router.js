@@ -88,10 +88,21 @@ router.delete('/history/:vehicleId', rejectUnauthenticated, (req, res) => {
   pool.query(queryText, [carId]).then(() => {
       res.sendStatus(200);
     }).catch((error) => {
-      console.error('Error deleting history:', error);
+      console.error('Error deleting all history:', error);
       res.sendStatus(500);
     });
 });
+// FOR DELETING SPECIFIC HISTORY DETAILS
+router.delete('/past/:historyId', rejectUnauthenticated, (req, res) => {
+  const historyId = req.params.historyId
+  const queryText = 'DELETE FROM "history" WHERE "id" = $1'
+  pool.query(queryText, [historyId]).then(() => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.error('Error deleting history:', error);
+    res.sendStatus(500);
+  });
+})
 
 router.delete('/wishlist/:vehicleId', rejectUnauthenticated, (req, res) => {
   const carId = req.params.vehicleId;
