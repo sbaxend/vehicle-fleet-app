@@ -71,9 +71,9 @@ const updateCarInfo = () => {
       };
       
     return (
-        <div style={{ marginTop: '5rem', display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
+        <div style={{  marginTop: '6rem', display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
         {selection.map((vehicle) => (
-          <Card key={vehicle.id} style={{ marginBottom: '1rem', padding: '1rem', width: '400px', position: 'relative' }}>
+          <Card key={vehicle.id} style={{boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)', borderRadius: '8px', marginBottom: '1rem', padding: '1rem', width: '400px', position: 'relative' }}>
             {editMode ? (
                 <>
                 <TextField
@@ -126,16 +126,16 @@ const updateCarInfo = () => {
                 sx={{ position: 'absolute', top: '0', left: '0', margin: '0.5rem', width: 56, height: 56, bgcolor: green[500] }}><DirectionsCarIcon/></Avatar>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{alignItems: 'left'}}>
-                <Typography  variant="h5" sx={{ marginBottom: '0.5rem' }}>
+                <Typography  variant="h6" sx={{ marginBottom: '0.5rem' }}>
                   Year: {vehicle.vehicle_year}
                 </Typography>
-                <Typography variant="h5" sx={{ marginBottom: '0.5rem' }}>
+                <Typography variant="h6" sx={{ marginBottom: '0.5rem' }}>
                   Make: {vehicle.vehicle_make}
                 </Typography>
-                <Typography variant="h5" sx={{ marginBottom: '0.5rem' }}>
+                <Typography variant="h6" sx={{ marginBottom: '0.5rem' }}>
                   Model: {vehicle.vehicle_model}
                 </Typography>
-                <Typography variant="h5" sx={{ marginBottom: '0.5rem' }}>
+                <Typography variant="h6" sx={{ marginBottom: '0.5rem' }}>
                   Body Style: {vehicle.body_style}
                 </Typography>
                 <Button onClick={toggleEditMode} variant="outlined"

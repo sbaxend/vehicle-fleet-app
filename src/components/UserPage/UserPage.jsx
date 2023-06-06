@@ -47,7 +47,7 @@ function UserPage() {
   return (
     
     <Container className="container" style={{ marginTop: '4rem' }}>
-      <Card variant="outlined" sx={{ textAlign: 'center', padding: '1rem' }}>
+      <Card variant="outlined" sx={{boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)', borderRadius: '8px', textAlign: 'center', padding: '1rem' }}>
         <Typography variant="h4" component="div">
           Your Garage
         </Typography>
@@ -76,7 +76,7 @@ function UserPage() {
         {filteredVehicles.map((vehicle, index) => (
           <Grid item xs={12} sm={6} md={4} key={vehicle.id}>
             <Grow in={true} timeout={1000} {...{ appear: true }} {...{ timeout: 1000 * index }}>
-          <Card className='vehicle-card' elevation={3} onClick={navToDetails(vehicle.id)}>
+          <Card sx={{boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)', borderRadius: '8px',}} className='vehicle-card' elevation={3} onClick={navToDetails(vehicle.id)}>
           <ListItem key={vehicle.id}>
             <DirectionsCarIcon/>{vehicle.vehicle_year} {vehicle.vehicle_make} {vehicle.vehicle_model} 
           </ListItem>

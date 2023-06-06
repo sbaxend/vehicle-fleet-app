@@ -36,6 +36,19 @@ function* fetchVehicles () {
     }
   };
 
+  function* fetchWishlist (action) {
+    console.log('IN fetchWishlist');
+    const vehicleId  = action.payload;
+    console.log('Wishlist Vehicle ID:', vehicleId)
+    try {
+      const wish = yield axios.get(`/api/vehicle/wishlist/${vehicleId}`)
+      yield put ({type: 'SET_WISHLIST', payload: wish.data})
+    } catch (error) {
+      console.log(`error in fetchWishlist: ${error}`);
+      alert('Something went wrong.');
+    }
+  };
+
 function* postVehicle (action) {
   console.log('in postVehicle', action.payload)
   try {
@@ -70,6 +83,24 @@ function* postHistory (action) {
   }
 }
 
+function* postWishlist (action) {
+  const carId = action.payload.vehicleId
+  console.log(carId)
+  console.log('in postWishlist', carId)
+  console.log(action.payload.wishlist_description)
+  try {
+    yield axios.post(`/api/vehicle/wishlist/${carId}`, {
+      wishlist_description: action.payload.wishlist_description,
+     
+    });
+    yield put({type: 'FETCH_WISHLIST', payload: carId});
+    
+  } catch (error) {
+    console.log(`error in postHistory`);
+    alert('Something went wrong');
+  }
+}
+
 function* deleteAll (action) {
   const hehicleId = action.payload.vehicleId;
   console.log('In deleteAll car id is:', hehicleId)
@@ -88,14 +119,27 @@ function* deleteAll (action) {
 };
 
 function* deleteHistory (action) {
-  let vehicleId = action.payload.vehicleId
-  let historyId = action.payload.historyId
+  let vehicleId = action.payload.vehicleId;
+  let historyId = action.payload.historyId;
   try {
     yield axios.delete(`/api/vehicle/past/${historyId}`)
     yield put({type: 'FETCH_CAR_HISTORY', payload:vehicleId})
   } catch (error) {
     console.log('Error in deleteHistory')
-  }
+  };
+};
+
+function* deleteWish (action) {
+  let vehicleId = action.payload.vehicleId;
+  let wishlistId = action.payload.wishlistId;
+  console.log('In deleteWish. wishlist ID: ', wishlistId)
+  console.log('In deleteWish. vehicle ID: ', vehicleId)
+  try {
+    yield axios.delete(`/api/vehicle/wish/${wishlistId}`);
+    yield put ({type: 'FETCH_WISHLIST', payload: vehicleId})
+  }  catch (error) {
+    console.log('Error in deleteWish')
+  };
 }
 
 function* updateCarInfo(action) {
@@ -115,7 +159,7 @@ function* updateCarInfo(action) {
     console.log(`error in UpdateCarInfo`);
     alert('Something went wrong')
   }
-}
+};
 
 
 
@@ -127,7 +171,10 @@ function* garageSaga(){
     yield takeEvery('ADD_HISTORY', postHistory);
     yield takeEvery('DELETE_VEHICLE', deleteAll );
     yield takeEvery('SEND_UPDATED_CAR', updateCarInfo);
-    yield takeEvery('HISTORY_DELETE', deleteHistory)
+    yield takeEvery('HISTORY_DELETE', deleteHistory);
+    yield takeEvery('FETCH_WISHLIST', fetchWishlist)
+    yield takeEvery('ADD_WISHLIST', postWishlist);
+    yield takeEvery('WISHLIST_DELETE', deleteWish)
 };
 
 export default garageSaga;

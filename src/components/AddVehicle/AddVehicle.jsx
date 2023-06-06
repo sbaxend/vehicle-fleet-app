@@ -7,9 +7,10 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-
+import Card from '@mui/material/Card';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import Typography from '@mui/material/Typography';
 function AddVehicle () {
     const [make, setMake] = useState('');
     const [model, setModel] = useState('');
@@ -54,8 +55,12 @@ console.log(year, make, model, body)
         <>
         <Container   style={{ marginTop: '5rem' }} >
 
-        <h2>Whats Your New Vehicle?</h2>
-        <form>
+        <Card variant="outlined" sx={{boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)', borderRadius: '8px', textAlign: 'center', padding: '1rem' }}>
+        <Typography variant="h4" component="div">
+          Add Your New Vehicle
+        </Typography>
+      </Card>
+        <form style={{ marginTop: '2rem' }} >
         <TextField
           label="Year"
           type="number"
