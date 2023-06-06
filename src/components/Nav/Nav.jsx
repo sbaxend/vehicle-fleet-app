@@ -15,6 +15,7 @@ function Nav() {
     <AppBar position='fixed' sx={{ backgroundColor: primary }}>
       <Toolbar>
          <TemporaryDrawer/>
+         <Typography align="center"variant='h4'>My Garage</Typography>
          <Box flexGrow={1} display="flex" justifyContent="flex-end" alignItems="center">
           <Avatar sx={{ marginRight: '1rem' }} /><Typography variant='h4'>{user.username}</Typography>
         </Box>

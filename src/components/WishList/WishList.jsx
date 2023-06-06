@@ -21,6 +21,7 @@ function WishList() {
 const { vehicleId } = useParams();
 const dispatch = useDispatch();
 const wish = useSelector((store) => store.vehicles.selectedVehicleWishlist);
+const selection = useSelector((store) => store.vehicles.selectedVehicle)
 console.log(wish)
 const history = useHistory();
 
@@ -73,7 +74,7 @@ useEffect(() => {
         <Typography variant="h6" align="left" sx={{ mt: 2 }}>
         Add To Your Wishlist 
         </Typography>
-        <Typography variant="h8">(Mainteenance, purchased Items, oil changes, etc.)</Typography>
+        <Typography variant="h8">(Upgrades and accessories)</Typography>
       <form onSubmit={submitWish}>
         <TextField
           value={wishlistDescription}
@@ -91,7 +92,7 @@ useEffect(() => {
         <Divider style={{ marginTop: '2rem' }} />
       
         <Typography variant="h6" align="left" sx={{ mt: 2 }}>
-         Your Vehicle History:
+         Your Wishlist:
         </Typography>
       </form>
       <Table sx={{ mt: 4 }}>

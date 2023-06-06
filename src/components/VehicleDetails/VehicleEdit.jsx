@@ -35,7 +35,7 @@ const clearForm = () => {
     setModel('')
     setYear('')
     setBody('')
-}
+};
 
 const selection = useSelector((store) => store.vehicles.selectedVehicle)
 

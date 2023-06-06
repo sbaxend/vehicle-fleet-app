@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from '@mui/material/Container';
+import {Typography, TextField, Button } from '@mui/material';
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,40 +23,38 @@ function RegisterForm() {
   return (
     <Container style={{ marginTop: '5rem' }}>
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
+    <Typography variant="h6">Register User</Typography>
+        {errors.registrationMessage && (
+          <Typography variant="h6" color="error" role="alert">
+            {errors.registrationMessage}
+          </Typography>
+        )}
+        <div>
+          <TextField
+            label="Username"
             type="text"
             name="username"
-            value={username}
             required
+            value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
+        </div>
+        <div>
+          <TextField
+            label="Password"
             type="password"
             name="password"
-            value={password}
             required
+            value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
+        </div>
+        <div>
+          <Button variant="contained" type="submit">
+            Register
+          </Button>
+        </div>
+      </form>
     </Container>
   );
 }

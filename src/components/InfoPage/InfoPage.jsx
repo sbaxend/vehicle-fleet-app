@@ -80,19 +80,31 @@ function InfoPage() {
         www.linkedin.com/in/seth-baxendell-39b5a6268
         </Link>
       </Typography>
+  <Typography variant="h2" sx={{ marginBottom: '2rem' }}>Future Updates</Typography>
+  <List>
+    <ListItem>
+      <ListItemText primary="Tracking Total expenses and charts" />
+    </ListItem>
+    <ListItem>
+      <ListItemText primary="Adding Pictures" />
+    </ListItem>
+    <ListItem>
+      <ListItemText primary="Share Feature to share a file when selling a vehicle" />
+    </ListItem>
+  </List>
       <Typography variant="h2" sx={{ marginBottom: '2rem' }}>Acknowledgments</Typography>
   <Typography variant="body1" paragraph>
     We would like to express our gratitude to the following individuals and organizations for their contributions and support in the development of this application:
   </Typography>
   <List>
     <ListItem>
-      <ListItemText primary="Contributor 1" />
+      <ListItemText primary="Prime Academy(Teachers and Classmates)" />
     </ListItem>
     <ListItem>
-      <ListItemText primary="Contributor 2" />
+      <ListItemText primary="Family" />
     </ListItem>
     <ListItem>
-      <ListItemText primary="Contributor 3" />
+      <ListItemText primary="Friends" />
     </ListItem>
   </List>
 </Container>

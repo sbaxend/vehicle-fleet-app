@@ -102,14 +102,14 @@ function* postWishlist (action) {
 }
 
 function* deleteAll (action) {
-  const hehicleId = action.payload.vehicleId;
-  console.log('In deleteAll car id is:', hehicleId)
+  const vehicleId = action.payload.vehicleId;
+  console.log('In deleteAll car id is:', vehicleId)
   try {
-    yield axios.delete(`/api/vehicle/history/${hehicleId}`);
+    yield axios.delete(`/api/vehicle/history/${vehicleId}`);
     console.log('History Cleared');
-    yield axios.delete(`/api/vehicle/wishlist/${hehicleId}`);
+    yield axios.delete(`/api/vehicle/wishlist/${vehicleId}`);
     console.log('Wishlist Cleared');
-    yield axios.delete(`/api/vehicle/car/${hehicleId}`);
+    yield axios.delete(`/api/vehicle/car/${vehicleId}`);
     console.log('Car Deletion Completed');
     yield put ({type: 'FETCH_VEHICLES' });
   } catch (error) {

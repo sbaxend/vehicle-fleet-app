@@ -49,7 +49,7 @@ function UserPage() {
     <Container className="container" style={{ marginTop: '4rem' }}>
       <Card variant="outlined" sx={{boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)', borderRadius: '8px', textAlign: 'center', padding: '1rem' }}>
         <Typography variant="h4" component="div">
-          Your Garage
+          Your Fleet
         </Typography>
       </Card>
     <InputLabel  style={{ marginTop: '1rem' }} align="right" htmlFor="sort-by-select">SORT BY</InputLabel>

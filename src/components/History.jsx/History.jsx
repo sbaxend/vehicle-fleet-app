@@ -57,13 +57,13 @@ function History() {
         console.log('Fetching car history');
         dispatch({type: 'FETCH_SELECTED_VEHICLE', payload: vehicleId })
       }, []);
-      
+
     return (
         <Container>
         <Typography variant="h6" align="left" sx={{ mt: 2 }}>
         Add Your Vehicle History 
         </Typography>
-        <Typography variant="h8">(Mainteenance, purchased Items, oil changes, etc.)</Typography>
+        <Typography variant="h8">(Maintenance, purchases, oil changes, etc.)</Typography>
       <form onSubmit={submitHistory}>
         <TextField
           value={date}
