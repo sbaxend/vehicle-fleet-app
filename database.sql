@@ -18,18 +18,21 @@ CREATE TABLE "cars" (
     "user_id" INT REFERENCES "user"(id)
 );
 
+ALTER TABLE "cars"
+ADD COLUMN "body_style" VARCHAR(50);
+
 --This Table is for each seperate Vehicle history
 CREATE TABLE "history" (
     "id" SERIAL PRIMARY KEY,
     "history_description" VARCHAR (1000),
     "car_id" INTEGER REFERENCES "cars"(id),
-    "notes" VARCHAR (1000),
-    "date" DATE
+    "history_notes" VARCHAR (1000),
+    "history_date" DATE
 );
 
 --This is the Wishlist of each Vehicle
 CREATE TABLE "wishlist" (
     "id" SERIAL PRIMARY KEY,
-    "description" VARCHAR (1000),
+    "wishlist_description" VARCHAR (1000),
     "car_id" INTEGER REFERENCES "cars"(id)
 );
